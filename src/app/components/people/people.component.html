@@ -1,0 +1,46 @@
+<section id="people">
+    <mat-card id="extension">
+
+        <p class="title">People</p>
+        <mat-divider></mat-divider>
+
+        <button mat-flat-button (click)="getPopular()" color="accent">Popular</button>
+
+        <!-- SEARCHFIELD FOR TITLE-->
+        <mat-form-field appearance="outline" color="accent" class="search-field">
+            <mat-label>Search Person</mat-label>
+            <input matInput placeholder="Title" #searchstr (keyup.enter)="searchPersonOnClick(searchstr.value)">
+            <mat-icon matSuffix (click)="searchPersonOnClick(searchstr.value)">search</mat-icon>
+        </mat-form-field>
+
+
+    </mat-card>
+
+
+
+
+    <main id="content">
+        <cdk-virtual-scroll-viewport itemSize="50" class="grid-viewport" infiniteScroll [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="onScroll()">
+            <div id="grid-wrapper">
+                <div id="grid" *ngFor="let item of peopleObject.people">
+                    <app-people-card [person]="item" (click)="openDialog(item)" class="series-card"></app-people-card>
+                </div>
+            </div>
+            
+            <div id="spinner-wrapper" *ngIf="hasMorePage">
+
+                <mat-spinner id="spinner" color="accent" mode="indeterminate"></mat-spinner>
+
+            </div>
+            <div id="no-result" *ngIf="noResult">
+                <p>No Result</p>
+            </div>
+
+        </cdk-virtual-scroll-viewport>
+
+
+    </main>
+
+
+</section>

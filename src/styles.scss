@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    font-family: Poppins, sans-serif;
+}
+
+// --------------------------
+//      SCROLLBAR STYLE
+// --------------------------
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+    
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background: none;
+    
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 2px;
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+// --------------------------
+//   DIALOGBOX STYLE
+// --------------------------
+.dialog .mat-dialog-container {
+  margin: 0;
+  padding: 0;
+}

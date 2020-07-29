@@ -1,0 +1,36 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+//-----------------------
+//    DEFAULT THEME
+//-----------------------
+
+$movie-app-primary: mat-palette($mat-gray, 800, 700, 900);
+$movie-app-accent:  mat-palette($mat-green, 700, 600, 800);
+$movie-app-warn:    mat-palette($mat-red, 500, 400, 700);
+
+$movie-app-theme: mat-light-theme($movie-app-primary, $movie-app-accent, $movie-app-warn);
+
+@include angular-material-theme($movie-app-theme);
+
+//-----------------------
+//      DARK THEME
+//-----------------------
+
+$movie-dark-primary: mat-palette($mat-gray, 700, 500, 800);
+$movie-dark-accent:  mat-palette($mat-green, 700, 600, 800);
+$movie-dark-warn:    mat-palette($mat-red, 500, 400, 700);
+$background-color: map_get($mat-gray, 900);
+
+$movie-dark-theme: mat-dark-theme($movie-app-primary, $movie-app-accent, $movie-app-warn);
+
+// Insert custom background color
+$background: map-get($movie-dark-theme, background);
+$background: map_merge($background, (background: $background-color));
+$movie-dark-theme: map_merge($movie-dark-theme, (background: $background));
+
+.dark-theme{
+    @include angular-material-theme($movie-dark-theme);
+}
+

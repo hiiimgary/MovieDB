@@ -1,0 +1,60 @@
+.wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    .image{
+        height: 100%;
+
+        img{
+            max-height: 100%;
+        }
+    }
+    .content{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin-left: 15px;
+        
+        .title{
+            
+            h1{
+                margin-top: 15px;
+                margin-bottom: 10px;
+            }
+            .metadata{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                p{
+                    margin-left: 10px;
+                    margin-top: 5px;
+                }
+                .place-of-birth, .deathday{
+                    font-size: 14px;
+                    margin-left: 30px;
+                }
+            }
+
+        }
+
+        .description{
+
+            p{
+                text-align: justify;
+                margin-bottom: 10px;
+            }
+
+        }
+        .btns{
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            button{
+                margin-right: 15px;
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+<section class="wrapper">
+    <div class="image">
+        <img src="{{ img_url }}" alt="">
+    </div>
+    <div mat-dialog-content class="content">
+        <div class="title">
+            <h1 mat-dialog-title>{{movie.title}}</h1>
+            <mat-divider></mat-divider>
+            <div class="metadata">
+                <p class="date">Release Year: {{movie.release_date | date:'yyyy'}}</p>
+                <p class="popularity">Popularity: {{movie.popularity}}</p>
+                <p class="vote-average">Vote average: {{movie.vote_average}}</p>
+                <p class="runtime"> Runtime (min): {{ movie.runtime }} </p>
+            </div>
+        </div>
+        <div class="description">
+            <h4>Description</h4>
+            <p>{{movie.overview}}</p>
+        </div>
+        <h4>Genres</h4>
+        <div class="genres">
+
+            <div *ngFor="let genre of movie.genres">
+                <p>{{ genre.name }}</p>
+            </div>
+        </div>
+        <div class="btns">
+            <button mat-flat-button color="accent" [mat-dialog-close]="'similar'">Similar Movies</button>
+            <button mat-flat-button color="accent" [mat-dialog-close]="'recommendations'" cdkFocusInitial>Recommended Movies</button>
+        </div>
+    </div>
+
+</section>

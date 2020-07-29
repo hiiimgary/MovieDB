@@ -1,0 +1,23 @@
+<mat-card class="container" *ngIf="movie != null">
+  <img mat-card-image src="{{ img_url }}" alt="">
+  <mat-card-header class="header">
+    <p class="title">{{ movie.title }}</p>
+
+  </mat-card-header>
+
+  <mat-card-content class="content">
+    <p>{{ movie.vote_average }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="container" *ngIf="series != null">
+  <img mat-card-image src="{{ img_url }}" alt="">
+  <mat-card-header class="header">
+    <p class="title">{{ series.name }}</p>
+
+  </mat-card-header>
+
+  <mat-card-content class="content">
+    <p>{{ series.vote_average }}</p>
+  </mat-card-content>
+</mat-card>

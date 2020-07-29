@@ -1,0 +1,104 @@
+<section class="wrapper">
+    <div class="image">
+        <img src="{{ img_url }}" alt="">
+    </div>
+    <div mat-dialog-content class="content">
+        <div class="title">
+            <h1 mat-dialog-title>{{series.name}}</h1>
+            <mat-divider></mat-divider>
+            <div class="metadata">
+                <p class="date">First Air Year: {{series.first_air_date | date:'yyyy'}}</p>
+                <p class="popularity">Popularity: {{series.popularity}}</p>
+                <p class="vote-average">Vote average: {{series.vote_average}}</p>
+                <p class="seasons"> Seasons: {{ series.number_of_seasons }} </p>
+            </div>
+        </div>
+
+        <div class="description">
+            <h4>Description</h4>
+            <p>{{series.overview}}</p>
+        </div>
+
+        <div class="seasons">
+            <h4>Seasons</h4>
+            <mat-accordion multi="false">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <p>Seasons</p>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-accordion multi="false">
+
+
+                        <div *ngFor="let season of seasons">
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <p>Season {{season.season_number}}</p>
+                                    </mat-panel-title>
+                                    <mat-panel-description class="panel-description">
+                                        <p>Aired in {{ season.air_date | date: 'yyyy' }}</p>
+
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+
+                                <p>{{season.overview}}</p>
+                                <mat-accordion multi="false">
+                                    <div *ngFor="let episode of season.episodes">
+                                        <mat-expansion-panel>
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    <p>{{episode.episode_number}} - {{ episode.name }} -
+                                                        {{ episode.air_date | date:'MM.dd'}}</p>
+                                                </mat-panel-title>
+
+                                            </mat-expansion-panel-header>
+                                            <p>{{episode.overview}}</p>
+
+                                            <div *ngIf="episode.crew.length != 0">
+                                                <h4>Crew</h4>
+                                                <div *ngFor="let person of episode.crew">
+                                                    <div class="person">
+                                                        <div>{{person.name}} - {{person.job}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </mat-expansion-panel>
+                                    </div>
+                                </mat-accordion>
+
+                            </mat-expansion-panel>
+                        </div>
+                    </mat-accordion>
+
+                </mat-expansion-panel>
+
+            </mat-accordion>
+
+        </div>
+
+        <div class="details">
+            <h4>Details</h4>
+            <p *ngIf="series.in_production">In Production</p>
+            <p>Type: {{series.type}}</p>
+
+        </div>
+
+        <h4>Genres</h4>
+        <div class="genres">
+
+            <div *ngFor="let genre of series.genres">
+                <p>{{ genre.name }}</p>
+            </div>
+        </div>
+        <div class="btns">
+            <button mat-flat-button color="accent" [mat-dialog-close]="'similar'">Similar Series</button>
+            <button mat-flat-button color="accent" [mat-dialog-close]="'recommendations'" cdkFocusInitial>Recommended
+                Series</button>
+        </div>
+    </div>
+
+</section>

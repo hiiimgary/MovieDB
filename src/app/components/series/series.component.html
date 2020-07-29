@@ -1,0 +1,110 @@
+<section id="movies">
+    <mat-card id="extension">
+
+        <p class="title">TV Series</p>
+        <p class="category">{{ category }}</p>
+        <mat-divider></mat-divider>
+
+        <!-- CATEGORY SELECTOR -->
+        <mat-form-field appearance="outline" color="accent" class="selector">
+            <mat-label>Category</mat-label>
+            <mat-select>
+                <mat-option (click)="getAiringToday()">Airing Today</mat-option>
+                <mat-option (click)="getOnTheAir()">On The Air</mat-option>
+                <mat-option (click)="getPopular()">Popular</mat-option>
+                <mat-option (click)="getTopRated()">Top Rated</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+
+        <mat-accordion multi="false">
+
+            <mat-expansion-panel class="searchfields">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <p>Search</p>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <!-- SEARCHFIELD FOR TITLE-->
+                <mat-form-field appearance="outline" color="accent" class="search-field">
+                    <mat-label>Search Tv Show</mat-label>
+                    <input matInput placeholder="Title" #searchstr (keyup.enter)="searchTVOnClick(searchstr.value)">
+                    <mat-icon matSuffix (click)="searchTVOnClick(searchstr.value)">search</mat-icon>
+                </mat-form-field>
+
+                <!-- SEARCHFIELD FOR KEYWORD-->
+                <mat-form-field appearance="outline" color="accent" class="search-field">
+                    <mat-label>Search Keyword</mat-label>
+                    <input matInput placeholder="Title" #keywordstr
+                        (keyup.enter)="searchKeywordOnClick(keywordstr.value)">
+                    <mat-icon matSuffix (click)="searchKeywordOnClick(keywordstr.value)">search</mat-icon>
+                </mat-form-field>
+
+            </mat-expansion-panel>
+
+            <mat-expansion-panel class="genres">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <p>Genres</p>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+
+                <cdk-virtual-scroll-viewport data-simplebar itemSize="20" class="scrollable-viewport">
+                    <mat-button-toggle-group vertical multiple class="genre-btn-group"
+                        #genreValues="matButtonToggleGroup" appearance="legacy">
+                        <div *cdkVirtualFor="let genre of seriesGenres" class="genre-btn-wrapper">
+                            <mat-button-toggle class="genre-btn" value="{{genre.id}}">{{ genre.name }}
+                            </mat-button-toggle>
+                        </div>
+                    </mat-button-toggle-group>
+                </cdk-virtual-scroll-viewport>
+
+                <button mat-flat-button [matMenuTriggerFor]="categories" class="search-btn" color="accent">Search Genres</button>
+                <mat-menu #categories="matMenu">
+                    <button mat-menu-item [matMenuTriggerData]="{name: 'popularity'}" [matMenuTriggerFor]="sortby">Popularity</button>
+                    <button mat-menu-item [matMenuTriggerData]="{name: 'first_air_date'}" [matMenuTriggerFor]="sortby">First Air Date</button>
+                    <button mat-menu-item [matMenuTriggerData]="{name: 'vote_average'}" [matMenuTriggerFor]="sortby">Vote Average</button>
+                </mat-menu>
+
+                <mat-menu #sortby="matMenu">
+                    <ng-template matMenuContent let-name="name">
+                        <button mat-menu-item (click)="searchGenresOnClick(genreValues.value, name + '.desc')">Desc</button>
+                        <button mat-menu-item (click)="searchGenresOnClick(genreValues.value, name + '.asc')">Asc</button>
+                    </ng-template>
+
+                </mat-menu>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card>
+
+
+
+
+    <main id="content">
+        <cdk-virtual-scroll-viewport itemSize="50" class="grid-viewport" infiniteScroll [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="onScroll()">
+            <div id="grid-wrapper">
+                <div id="grid" *ngFor="let item of tvSeriesObject.series">
+                    <app-card [series]="item" (click)="openDialog(item)" class="series-card"></app-card>
+                </div>
+            </div>
+            <div id="spinner-wrapper" *ngIf="hasMorePage">
+
+                <mat-spinner id="spinner" color="accent" mode="indeterminate"></mat-spinner>
+
+            </div>
+            <div id="no-result" *ngIf="noResult">
+                <p>No Result</p>
+            </div>
+
+        </cdk-virtual-scroll-viewport>
+
+
+    </main>
+
+
+</section>

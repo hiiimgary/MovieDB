@@ -1,0 +1,26 @@
+.container{
+    width: 150px;
+    //background-color: gold;
+
+    .header{
+        padding: 0;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+
+
+        .title{
+            width: 100%;
+            margin: 0;
+            font-size: 12px;
+        }
+    }
+    .content{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+}
